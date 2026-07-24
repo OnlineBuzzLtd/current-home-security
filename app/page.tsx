@@ -41,6 +41,21 @@ const faqs = [
   },
 ];
 
+const reviews = [
+  {
+    quote: "Very professional and good customer service!",
+    name: "Masi Faizi",
+  },
+  {
+    quote: "Really professional, on time, and left everything tidy. Highly recommend!",
+    name: "Samantha Didymus",
+  },
+  {
+    quote: "10/10 service. Clean and tidy, very friendly and helpful throughout.",
+    name: "Max Nichols",
+  },
+];
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -105,7 +120,14 @@ export default function Home() {
             <p className="hero-intro">Professional alarm and CCTV systems with clean, discreet installation and transparent pricing. No surprises. Just complete peace of mind.</p>
             <div className="hero-actions">
               <button className="button button-primary" onClick={() => openQuote("Alarm + CCTV bundle — £3,050")}>Get my fixed-price quote <span>↗</span></button>
-              <a className="text-link" href="#packages">View packages <span>↘</span></a>
+              <a className="button button-call" href="tel:+447476149725" aria-label="Call CURRENT on 07476 149 725">
+                <span aria-hidden="true">☎</span> Call 07476 149 725
+              </a>
+            </div>
+            <div className="google-rating" aria-label="Rated 5 out of 5 from 40 Google reviews">
+              <span aria-hidden="true">★★★★★</span>
+              <strong>5.0</strong>
+              <small>from 40 Google reviews</small>
             </div>
             <div className="trust-row" aria-label="Service benefits">
               <span>✓ Fixed pricing</span>
@@ -141,6 +163,25 @@ export default function Home() {
         <p>Respectful installation</p>
         <p>Clear handover</p>
         <p>South London focused</p>
+      </section>
+
+      <section className="section reviews-section" aria-labelledby="reviews-title">
+        <div className="reviews-heading">
+          <div>
+            <p className="eyebrow">Five-star Google reviews</p>
+            <h2 id="reviews-title">Trusted inside the homes we work in.</h2>
+          </div>
+          <p>Rated 5.0 from 40 Google reviews, with real feedback from CURRENT customers.</p>
+        </div>
+        <div className="reviews-grid">
+          {reviews.map((review) => (
+            <figure className="review-card" key={review.name}>
+              <div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <blockquote>“{review.quote}”</blockquote>
+              <figcaption>{review.name}</figcaption>
+            </figure>
+          ))}
+        </div>
       </section>
 
       <section className="section packages-section" id="packages">
