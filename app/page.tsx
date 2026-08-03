@@ -3,6 +3,12 @@
 import { FormEvent, useEffect, useState } from "react";
 import { locations } from "./locations/location-data";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const alarmPlans = [
   {
     name: "Essential",
@@ -89,6 +95,11 @@ export default function Home() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    window.gtag?.("event", "conversion", {
+      send_to: "AW-16871583749/U7iMCMPwgNocEIXg_-w-",
+      value: 1.0,
+      currency: "GBP",
+    });
     setSubmitted(true);
   }
 
