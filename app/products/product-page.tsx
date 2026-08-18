@@ -43,6 +43,7 @@ export default function ProductPage({ config }: { config: ProductPageConfig }) {
         <div className="product-hero-image" aria-hidden="true" />
         <div className="product-hero-content">
           <p className="eyebrow">{config.eyebrow}</p>
+          <p className="august-offer">August offer · 10% off all packages</p>
           <h1>{config.title}</h1>
           <p>{config.intro}</p>
           <div className="product-actions">
