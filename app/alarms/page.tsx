@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ProductPage, { type ProductPageConfig } from "../products/product-page";
 
 export const metadata: Metadata = {
-  title: "Pyronix Alarm Installation South London | From £1,000",
-  description: "Professional Pyronix Enforcer V11 alarm installation across South London. Three clear packages at £1,000, £1,400 and £1,750.",
+  title: "Pyronix Alarm Kits & Installation South London | From £835",
+  description: "Pyronix Enforcer V11 alarm kits from £835, with professional supply-and-install packages at £1,555 and £2,950. 10% off all packages this August.",
   alternates: { canonical: "/alarms" },
 };
 
@@ -11,13 +11,13 @@ const config: ProductPageConfig = {
   kind: "alarms",
   eyebrow: "Pyronix Enforcer V11 · South London",
   title: "A home alarm installed around your life.",
-  intro: "Professional Pyronix alarm systems with discreet detectors, clean installation and three transparent price points. Easy to understand. Hard to ignore.",
+  intro: "Choose a supply-only Pyronix alarm kit or professional installation, with three transparent packages and 10% off throughout August.",
   quoteHref: "/?quote=alarm",
-  postcodeLine: "Packages from £1,000",
+  postcodeLine: "August prices from £751.50",
   heroTiles: [
-    { label: "Essential", value: "£1,000" },
-    { label: "Complete", value: "£1,400", featured: true },
-    { label: "Enhanced", value: "£1,750" },
+    { label: "Kit only · August", value: "£751.50" },
+    { label: "Installed · August", value: "£1,399.50", featured: true },
+    { label: "Top tier · August", value: "£2,655" },
   ],
   overviewEyebrow: "Alarm protection without the guesswork",
   overviewTitle: "Coverage that reflects how your home is actually used.",
@@ -27,9 +27,9 @@ const config: ProductPageConfig = {
     "The Pyronix Enforcer V11 platform gives us a strong, expandable foundation for family homes and more complex layouts.",
   ],
   packages: [
-    { eyebrow: "Focused protection", name: "Essential", price: "£1,000", description: "A straightforward starting point for smaller homes and simpler layouts.", bullets: ["Pyronix Enforcer V11 platform", "Professional installation", "System setup and testing", "Clear homeowner handover"] },
-    { eyebrow: "Family-home coverage", name: "Complete", price: "£1,400", description: "Our most popular tier for homes with more access points and living zones.", bullets: ["Expanded detector coverage", "Entry routes planned carefully", "Professional installation", "System setup and handover"], featured: true },
-    { eyebrow: "Larger properties", name: "Enhanced", price: "£1,750", description: "A broader starting point for larger homes, outbuildings or complex access.", bullets: ["Wider property coverage", "Additional zones considered", "Professional installation", "System setup and handover"] },
+    { eyebrow: "Supply kit only", name: "Wireless Enforcer Kit", price: "£751.50", description: "August price. Usually £835. Supplied for your own installation.", bullets: ["ProControl+ app access", "Enforcer V11 panel with built-in Wi-Fi", "Wireless arming station", "4 pet-immune wireless PIR detectors", "2 nano door contacts", "Wireless Deltabell module and cover"] },
+    { eyebrow: "Standard supply & install", name: "Professionally Installed", price: "£1,399.50", description: "August price. Usually £1,555. Our complete kit with premium installation.", bullets: ["Everything in the supply-only kit", "Premium professional installation", "10+ year experienced installer", "System setup, testing and handover"], featured: true },
+    { eyebrow: "Top tier supply & install", name: "Expanded Protection", price: "£2,655", description: "August price. Usually £2,950. More detection and control for larger homes.", bullets: ["Everything in the standard installed package", "Additional tablet arming screen", "2 additional pet-immune PIR detectors", "1 additional nano door contact", "1 additional keypad", "4 shock sensors"] },
   ],
   process: [
     { title: "Map the access points", copy: "We review doors, accessible windows, side access and the way people move through the property." },
@@ -46,7 +46,7 @@ const config: ProductPageConfig = {
     { question: "Which alarm system do you install?", answer: "Our alarm packages are based on the Pyronix Enforcer V11 platform, configured around the layout and coverage requirements of your home." },
     { question: "Which package is right for me?", answer: "The three tiers provide realistic starting points. We recommend the most suitable level after reviewing the property size, entrances and areas you want protected." },
     { question: "Can the system be expanded later?", answer: "Additional detectors, shock sensors, keypads and other suitable components can be discussed at installation or as your requirements change." },
-    { question: "Is installation included?", answer: "Each advertised package includes standard professional installation, setup, testing and handover. Non-standard requirements and optional additions are agreed before work begins." },
+    { question: "Is installation included?", answer: "Installation is not included in the £835 supply-only kit. It is included in the £1,555 standard and £2,950 top-tier packages, with 10% off all three throughout August." },
   ],
   finalTitle: "Choose the alarm. Confirm the scope. Protect the home.",
 };
