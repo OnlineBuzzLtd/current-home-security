@@ -56,6 +56,7 @@ a { color: inherit; text-decoration: none; }
 .hero-grid { position: relative; z-index: 2; width: 100%; min-height: 100%; padding: 154px var(--page-pad) 72px; display: grid; grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr); align-items: center; }
 .hero-copy { max-width: 700px; }
 .eyebrow { margin: 0 0 26px; color: #4f8bff; font-size: 12px; font-weight: 800; letter-spacing: .25em; text-transform: uppercase; }
+.august-offer { width: fit-content; margin: -8px 0 24px; padding: 9px 12px; background: #f4c542; color: #07111f; font-size: 11px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }
 h1 { font-size: clamp(60px, 5.9vw, 94px); line-height: .94; letter-spacing: -.055em; margin-bottom: 30px; max-width: 800px; }
 .hero-intro { max-width: 620px; color: #c5cedd; font-size: clamp(17px, 1.35vw, 21px); line-height: 1.55; }
@@ -77,6 +78,7 @@ h1 { font-size: clamp(60px, 5.9vw, 94px); line-height: .94; letter-spacing: -.05
 .price-cell > span { font-size: 16px; font-weight: 700; margin-bottom: 17px; }
 .price-cell small, .offer-price small { color: var(--muted); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; margin-bottom: 8px; }
 .price-cell strong { color: var(--blue-light); font-size: clamp(31px, 2.8vw, 48px); line-height: 1; }
+.price-cell del { margin-top: 7px; color: var(--muted); font-size: 13px; }
 .bundle-cell { border: 2px solid var(--blue-light); margin: -6px; min-height: 162px; box-shadow: 0 0 32px rgba(21,87,255,.18); }
 .scroll-cue { position: absolute; z-index: 3; bottom: 34px; left: var(--page-pad); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .2em; display: flex; gap: 13px; }
 
@@ -106,7 +108,10 @@ h1 { font-size: clamp(60px, 5.9vw, 94px); line-height: .94; letter-spacing: -.05
 .popular { position: absolute; right: 28px; top: 25px; background: var(--blue); color: white; font-size: 10px; padding: 7px 10px; letter-spacing: .12em; text-transform: uppercase; }
 .package-label { color: var(--blue); text-transform: uppercase; letter-spacing: .2em; font-size: 10px; font-weight: 800; }
 .package-card h3 { font-size: 34px; margin-bottom: 16px; }
-.package-price { font-size: clamp(46px, 4vw, 68px); letter-spacing: -.05em; line-height: 1; font-weight: 800; color: var(--blue); }
+.package-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; color: var(--blue); }
+.package-price del { color: #788496; font-size: 18px; font-weight: 600; letter-spacing: 0; }
+.package-price strong { font-size: clamp(42px, 3.8vw, 62px); letter-spacing: -.05em; line-height: 1; }
+.package-price small { width: 100%; color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
 .package-description { color: #59687b; line-height: 1.65; min-height: 82px; }
 .featured .package-description { color: var(--muted); }
 .package-card ul { list-style: none; padding: 25px 0 0; margin: 0 0 30px; border-top: 1px solid #d6dde7; display: grid; gap: 14px; }
@@ -123,6 +128,9 @@ h1 { font-size: clamp(60px, 5.9vw, 94px); line-height: .94; letter-spacing: -.05
 .bundle-offer { background: var(--ink-soft); color: var(--white); }
 .offer-price { margin-top: 40px; display: flex; flex-direction: column; }
 .offer-price strong { font-size: clamp(58px, 6.5vw, 100px); line-height: .9; letter-spacing: -.06em; color: var(--blue); }
+.offer-price del { margin-top: 12px; color: var(--muted); font-size: 18px; }
+.offer-specs { margin: 24px 0 30px; padding: 0; list-style: none; display: grid; gap: 10px; color: #d8e1ef; font-size: 13px; }
+.offer-specs li::before { content: "✓"; margin-right: 9px; color: var(--blue-light); font-weight: 900; }
 .price-note { color: #5c6979; font-size: 12px; margin: 22px 0 0; }
 
 .reassurance-section { display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(60px, 9vw, 150px); background: #081321; align-items: center; }
