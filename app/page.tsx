@@ -11,27 +11,33 @@ declare global {
 
 const alarmPlans = [
   {
-    name: "Essential",
-    price: "£1,000",
-    description: "A focused Pyronix Enforcer V11 setup for straightforward home protection.",
+    name: "Supply Kit Only",
+    price: "£835",
+    augustPrice: "£751.50",
+    description: "A complete wireless Pyronix Enforcer kit supplied for your own installation.",
+    bullets: ["ProControl+ app access", "Enforcer V11 panel with built-in Wi-Fi", "Wireless arming station", "4 pet-immune wireless PIR detectors", "2 nano door contacts", "Wireless Deltabell module and cover"],
   },
   {
-    name: "Complete",
-    price: "£1,400",
-    description: "Our most popular alarm setup for family homes and multiple access points.",
+    name: "Standard Supply & Install",
+    price: "£1,555",
+    augustPrice: "£1,399.50",
+    description: "The complete wireless kit, professionally fitted and handed over.",
+    bullets: ["Everything in the supply-only kit", "Premium professional installation", "Installed by a 10+ year experienced installer", "System setup, testing and handover"],
     featured: true,
   },
   {
-    name: "Enhanced",
-    price: "£1,750",
-    description: "Expanded coverage for larger homes, outbuildings or more complex layouts.",
+    name: "Top Tier Supply & Install",
+    price: "£2,950",
+    augustPrice: "£2,655",
+    description: "Expanded detection and control for larger homes or more complex layouts.",
+    bullets: ["Everything in the standard installed package", "Additional tablet arming screen", "2 additional pet-immune wireless PIR detectors", "1 additional nano door contact", "1 additional keypad", "4 shock sensors"],
   },
 ];
 
 const faqs = [
   {
     q: "Is the price shown the final installation price?",
-    a: "The package price covers the described system, standard professional installation, setup and handover. We confirm your property layout before work begins and clearly price any optional additions first.",
+    a: "The £835 package is supply-only. The £1,555 standard and £2,950 top-tier packages include supply and professional installation. Any non-standard requirements are agreed before work begins.",
   },
   {
     q: "Which systems do you install?",
@@ -39,7 +45,7 @@ const faqs = [
   },
   {
     q: "Can I combine an alarm and CCTV?",
-    a: "Yes. Our £3,050 bundle combines the mid-tier alarm with a CCTV installation, giving you a joined-up starting point at a lower price than buying separately.",
+    a: "Yes. Our bundle starts from £3,400 and combines the standard installed alarm package with a CCTV installation. It is £3,060 during the August offer.",
   },
   {
     q: "Do you cover my area?",
@@ -65,7 +71,7 @@ const reviews = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState("Alarm + CCTV bundle — £3,050");
+  const [selectedPackage, setSelectedPackage] = useState("Alarm + CCTV bundle — from £3,400");
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -80,7 +86,7 @@ export default function Home() {
     const quote = new URLSearchParams(window.location.search).get("quote");
     if (quote !== "alarm" && quote !== "cctv") return;
     const frame = window.requestAnimationFrame(() => {
-      setSelectedPackage(quote === "alarm" ? "Complete alarm — £1,400" : "Hikvision CCTV — from £2,100");
+      setSelectedPackage(quote === "alarm" ? "Standard supply & install — £1,555" : "Hikvision CCTV — from £2,550");
       setQuoteOpen(true);
     });
     return () => window.cancelAnimationFrame(frame);
@@ -115,7 +121,7 @@ export default function Home() {
           <a href="#packages" onClick={() => setMenuOpen(false)}>Packages</a>
           <a href="#areas" onClick={() => setMenuOpen(false)}>Areas</a>
         </nav>
-        <button className="button header-cta" onClick={() => openQuote("Alarm + CCTV bundle — £3,050")}>Get my fixed-price quote</button>
+        <button className="button header-cta" onClick={() => openQuote("Alarm + CCTV bundle — from £3,400")}>Get my fixed-price quote</button>
         <button className="menu-toggle" aria-label="Toggle navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
           <span />
           <span />
@@ -127,10 +133,11 @@ export default function Home() {
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Home security · South London</p>
+            <p className="august-offer">August offer · 10% off all packages</p>
             <h1>Protect what matters. Installed properly.</h1>
             <p className="hero-intro">Professional alarm and CCTV systems with clean, discreet installation and transparent pricing. No surprises. Just complete peace of mind.</p>
             <div className="hero-actions">
-              <button className="button button-primary" onClick={() => openQuote("Alarm + CCTV bundle — £3,050")}>Get my fixed-price quote <span>↗</span></button>
+              <button className="button button-primary" onClick={() => openQuote("Alarm + CCTV bundle — from £3,400")}>Get my fixed-price quote <span>↗</span></button>
               <a className="button button-call" href="tel:+447476149725" aria-label="Call CURRENT on 07476 149 725">
                 <span aria-hidden="true">☎</span> Call 07476 149 725
               </a>
@@ -151,18 +158,21 @@ export default function Home() {
           <div className="hero-pricing" aria-label="Package price summary">
             <a href="/alarms" className="price-cell">
               <span>Pyronix alarms</span>
-              <small>From</small>
-              <strong>£1,000</strong>
+              <small>August price · kit only</small>
+              <strong>£751.50</strong>
+              <del>£835</del>
             </a>
             <a href="/cctv" className="price-cell">
               <span>Hikvision CCTV</span>
-              <small>From</small>
-              <strong>£2,100</strong>
+              <small>August price · from</small>
+              <strong>£2,295</strong>
+              <del>£2,550</del>
             </a>
-            <button className="price-cell bundle-cell" onClick={() => openQuote("Alarm + CCTV bundle — £3,050")}>
+            <button className="price-cell bundle-cell" onClick={() => openQuote("Alarm + CCTV bundle — from £3,400")}>
               <span>Alarm + CCTV</span>
-              <small>Bundle price</small>
-              <strong>£3,050</strong>
+              <small>August price · from</small>
+              <strong>£3,060</strong>
+              <del>£3,400</del>
             </button>
           </div>
         </div>
@@ -198,7 +208,7 @@ export default function Home() {
       <section className="section packages-section" id="packages">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Transparent by design</p>
+            <p className="eyebrow">August offer · 10% off</p>
             <h2>Choose the protection that fits your home.</h2>
           </div>
           <p>Clear starting points. No vague “contact us for pricing.” We confirm your layout, then agree the scope before installation.</p>
@@ -210,14 +220,9 @@ export default function Home() {
               {plan.featured && <span className="popular">Most popular</span>}
               <p className="package-label">Pyronix alarm</p>
               <h3>{plan.name}</h3>
-              <p className="package-price">{plan.price}</p>
+              <p className="package-price"><del>{plan.price}</del><strong>{plan.augustPrice}</strong><small>August price</small></p>
               <p className="package-description">{plan.description}</p>
-              <ul>
-                <li>Pyronix Enforcer V11 system</li>
-                <li>Professional installation</li>
-                <li>System setup and handover</li>
-                <li>Optional upgrades priced clearly</li>
-              </ul>
+              <ul>{plan.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
               <button className="card-link" onClick={() => openQuote(`${plan.name} alarm — ${plan.price}`)}>Request this package <span>↗</span></button>
             </article>
           ))}
@@ -229,9 +234,10 @@ export default function Home() {
               <p className="eyebrow">Hikvision CCTV</p>
               <h3>See what is happening, day or night.</h3>
               <p>Professionally positioned cameras, reliable recording and a clean finish around your property.</p>
-              <button className="button button-light" onClick={() => openQuote("Hikvision CCTV — from £2,100")}>Discuss my CCTV setup</button>
+              <ul className="offer-specs"><li>27-inch Hikvision 1080p monitor</li><li>4-channel HiLook by Hikvision NVR with 4-PoE</li><li>4MP Hikvision AcuSense turret IP camera with mic and 30m IR</li></ul>
+              <button className="button button-light" onClick={() => openQuote("Hikvision CCTV — from £2,550")}>Discuss my CCTV setup</button>
             </div>
-            <div className="offer-price"><small>Starting from</small><strong>£2,100</strong></div>
+            <div className="offer-price"><small>August price · from</small><strong>£2,295</strong><del>£2,550</del></div>
           </article>
 
           <article className="wide-offer bundle-offer">
@@ -239,9 +245,9 @@ export default function Home() {
               <p className="eyebrow">Complete protection</p>
               <h3>One home. One joined-up security package.</h3>
               <p>Combine our mid-tier Pyronix alarm with a Hikvision CCTV installation.</p>
-              <button className="button button-primary" onClick={() => openQuote("Alarm + CCTV bundle — £3,050")}>Choose the bundle</button>
+              <button className="button button-primary" onClick={() => openQuote("Alarm + CCTV bundle — from £3,400")}>Choose the bundle</button>
             </div>
-            <div className="offer-price"><small>Bundle price</small><strong>£3,050</strong></div>
+            <div className="offer-price"><small>August price · from</small><strong>£3,060</strong><del>£3,400</del></div>
           </article>
         </div>
         <p className="price-note">Final equipment quantities and any non-standard installation requirements are confirmed after your property review.</p>
@@ -341,7 +347,7 @@ export default function Home() {
                 <h2 id="quote-title">Tell us about your property.</h2>
                 <p>We’ll use these details to confirm coverage and arrange the next step.</p>
                 <form onSubmit={handleSubmit}>
-                  <label>Package<select value={selectedPackage} onChange={(e) => setSelectedPackage(e.target.value)} required><option>Essential alarm — £1,000</option><option>Complete alarm — £1,400</option><option>Enhanced alarm — £1,750</option><option>Hikvision CCTV — from £2,100</option><option>Alarm + CCTV bundle — £3,050</option><option>Help me choose</option></select></label>
+                  <label>Package<select value={selectedPackage} onChange={(e) => setSelectedPackage(e.target.value)} required><option>Supply-only alarm kit — £835</option><option>Standard supply & install — £1,555</option><option>Top-tier supply & install — £2,950</option><option>Hikvision CCTV — from £2,550</option><option>Alarm + CCTV bundle — from £3,400</option><option>Help me choose</option></select></label>
                   <div className="form-row"><label>First name<input name="firstName" autoComplete="given-name" required /></label><label>Last name<input name="lastName" autoComplete="family-name" required /></label></div>
                   <label>South London postcode<input name="postcode" autoComplete="postal-code" placeholder="e.g. SW19 7AA" required /></label>
                   <div className="form-row"><label>Phone number<input name="phone" type="tel" autoComplete="tel" required /></label><label>Email address<input name="email" type="email" autoComplete="email" required /></label></div>
