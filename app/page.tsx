@@ -73,6 +73,8 @@ export default function Home() {
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("Alarm + CCTV bundle — from £3,400");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
@@ -95,18 +97,52 @@ export default function Home() {
   function openQuote(packageName: string) {
     setSelectedPackage(packageName);
     setSubmitted(false);
+    setSubmitError("");
     setQuoteOpen(true);
     setMenuOpen(false);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    window.gtag?.("event", "conversion", {
-      send_to: "AW-16871583749/U7iMCMPwgNocEIXg_-w-",
-      value: 1.0,
-      currency: "GBP",
-    });
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const params = new URLSearchParams(window.location.search);
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          package: formData.get("package"),
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          postcode: formData.get("postcode"),
+          phone: formData.get("phone"),
+          email: formData.get("email"),
+          notes: formData.get("notes"),
+          website: formData.get("website"),
+          sourcePage: window.location.href,
+          campaign: params.get("utm_campaign") ?? "Direct / organic",
+        }),
+      });
+
+      if (!response.ok) throw new Error("Lead delivery failed");
+
+      window.gtag?.("event", "conversion", {
+        send_to: "AW-16871583749/U7iMCMPwgNocEIXg_-w-",
+        value: 1.0,
+        currency: "GBP",
+      });
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      setSubmitError("We couldn’t send your request. Please try again or call 07476 149 725.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -347,13 +383,15 @@ export default function Home() {
                 <h2 id="quote-title">Tell us about your property.</h2>
                 <p>We’ll use these details to confirm coverage and arrange the next step.</p>
                 <form onSubmit={handleSubmit}>
-                  <label>Package<select value={selectedPackage} onChange={(e) => setSelectedPackage(e.target.value)} required><option>Supply-only alarm kit — £835</option><option>Standard supply & install — £1,555</option><option>Top-tier supply & install — £2,950</option><option>Hikvision CCTV — from £2,550</option><option>Alarm + CCTV bundle — from £3,400</option><option>Help me choose</option></select></label>
+                  <label>Package<select name="package" value={selectedPackage} onChange={(e) => setSelectedPackage(e.target.value)} required><option>Supply-only alarm kit — £835</option><option>Standard supply & install — £1,555</option><option>Top-tier supply & install — £2,950</option><option>Hikvision CCTV — from £2,550</option><option>Alarm + CCTV bundle — from £3,400</option><option>Help me choose</option></select></label>
                   <div className="form-row"><label>First name<input name="firstName" autoComplete="given-name" required /></label><label>Last name<input name="lastName" autoComplete="family-name" required /></label></div>
                   <label>South London postcode<input name="postcode" autoComplete="postal-code" placeholder="e.g. SW19 7AA" required /></label>
                   <div className="form-row"><label>Phone number<input name="phone" type="tel" autoComplete="tel" required /></label><label>Email address<input name="email" type="email" autoComplete="email" required /></label></div>
                   <label>Anything we should know?<textarea name="notes" rows={3} placeholder="Property size, access points or preferred timing" /></label>
+                  <label className="form-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
                   <label className="consent"><input type="checkbox" required /><span>I agree to be contacted about my home-security quote.</span></label>
-                  <button className="button button-primary form-submit" type="submit">Request my quote <span>↗</span></button>
+                  {submitError && <p className="form-error" role="alert">{submitError}</p>}
+                  <button className="button button-primary form-submit" type="submit" disabled={submitting}>{submitting ? "Sending…" : "Request my quote"} <span>↗</span></button>
                   <small>Your information is only used to respond to your enquiry.</small>
                 </form>
               </>
