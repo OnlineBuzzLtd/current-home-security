@@ -33,8 +33,8 @@ a { color: inherit; text-decoration: none; }
   z-index: 20;
   border-bottom: 1px solid rgba(255,255,255,.09);
 }
-.brand { font-weight: 800; font-size: clamp(22px, 2.2vw, 33px); letter-spacing: .12em; width: fit-content; }
-.brand span { color: var(--blue-light); position: relative; }
+.brand { display: inline-flex; width: clamp(150px, 16vw, 210px); flex: 0 0 auto; }
+.brand img { display: block; width: 100%; height: auto; }
 .nav { display: flex; gap: clamp(24px, 3.5vw, 56px); align-items: center; }
 .nav a { color: #d9e1ee; font-size: 15px; position: relative; }
 .nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -8px; height: 2px; background: var(--blue-light); transition: right .18s ease; }
@@ -208,6 +208,41 @@ footer small { color: #66758a; justify-self: end; text-align: right; }
 .quote-modal form > small { text-align: center; color: #7e8ca0; }
 .success-state { text-align: center; padding: 30px 0; }
 .success-state > span { width: 70px; height: 70px; display: grid; place-items: center; border-radius: 50%; margin: 0 auto 32px; background: var(--blue); font-size: 28px; }
+
+/* Autumn offer landing page */
+.autumn-page { background: #07111f; }
+.autumn-hero { min-height: 820px; padding: 150px var(--page-pad) 80px; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(40px, 7vw, 110px); align-items: center; background: radial-gradient(circle at 75% 30%, rgba(21,87,255,.24), transparent 35%), #07111f; }
+.autumn-hero > div > p:not(.eyebrow) { max-width: 650px; color: #c5cedd; font-size: 19px; line-height: 1.65; }
+.autumn-hero img { width: 100%; height: auto; object-fit: contain; background: white; border-radius: 2px; box-shadow: 0 30px 90px rgba(0,0,0,.35); }
+.autumn-offers { background: #f3f6fb; color: var(--ink); }
+.autumn-offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #cad3df; }
+.autumn-offer-grid article { min-height: 390px; padding: 42px; border-right: 1px solid #cad3df; display: flex; flex-direction: column; }
+.autumn-offer-grid article:last-child { border-right: 0; background: var(--ink); color: white; }
+.autumn-offer-grid span { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.autumn-offer-grid h3 { margin: 44px 0 16px; font-size: 30px; }
+.autumn-offer-grid strong { color: var(--blue); font-size: 24px; }
+.autumn-offer-grid p { color: #637084; line-height: 1.65; }
+.autumn-offer-grid article:last-child p { color: var(--muted); }
+.autumn-offer-grid a { margin-top: auto; padding-bottom: 10px; border-bottom: 2px solid var(--blue); font-weight: 800; }
+.installed-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(60px, 9vw, 150px); }
+.installed-section h2, .comparison-section h2 { font-size: clamp(44px, 5vw, 76px); line-height: 1; letter-spacing: -.045em; }
+.installed-section > div:first-child > p:last-child { color: var(--muted); font-size: 18px; line-height: 1.7; }
+.installed-list { border-top: 1px solid var(--line); }
+.installed-list p { margin: 0; padding: 24px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
+.installed-list b { color: var(--blue-light); margin-right: 24px; }
+.comparison-section { background: #f3f6fb; color: var(--ink); }
+.comparison-table { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 50px; border: 1px solid #cad3df; }
+.comparison-table div { padding: 38px; border-right: 1px solid #cad3df; display: grid; gap: 22px; }
+.comparison-table div:last-child { border-right: 0; }
+.comparison-table strong { color: var(--blue); font-size: 34px; }
+.comparison-table span { color: #637084; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .autumn-hero, .installed-section { grid-template-columns: 1fr; }
+  .autumn-hero { padding-top: 120px; }
+  .autumn-offer-grid, .comparison-table { grid-template-columns: 1fr; }
+  .autumn-offer-grid article, .comparison-table div { border-right: 0; border-bottom: 1px solid #cad3df; }
+}
 
 /* Location pages */
 .location-page { background: var(--ink); }
