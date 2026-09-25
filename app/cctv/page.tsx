@@ -3,7 +3,7 @@ import ProductPage, { type ProductPageConfig } from "../products/product-page";
 
 export const metadata: Metadata = {
   title: "Hikvision CCTV Installation South London | From £2,550",
-  description: "Professional Hikvision CCTV installation across South London from £2,550, including monitor, NVR and 4MP AcuSense camera. 10% off this August.",
+  description: "Professional Hikvision CCTV installation across South London from £2,550, including monitor, NVR and 4MP AcuSense camera.",
   alternates: { canonical: "/cctv" },
 };
 
@@ -11,12 +11,12 @@ const config: ProductPageConfig = {
   kind: "cctv",
   eyebrow: "Hikvision CCTV · South London",
   title: "See what matters. Record what happens.",
-  intro: "Professionally planned Hikvision CCTV with a 27-inch monitor, NVR and 4MP AcuSense camera. Starting from £2,550, with 10% off this August.",
+  intro: "Professionally planned Hikvision CCTV with a 27-inch monitor, NVR and 4MP AcuSense camera. Starting from £2,550 with a free home-security assessment.",
   quoteHref: "/?quote=cctv",
-  postcodeLine: "August installations from £2,295",
+  postcodeLine: "Free home-security assessment",
   heroTiles: [
-    { label: "CCTV · August", value: "From £2,295" },
-    { label: "Bundle · August", value: "From £3,060", featured: true },
+    { label: "CCTV installed", value: "From £2,550" },
+    { label: "Complete bundle", value: "From £3,400", featured: true },
     { label: "System", value: "Hikvision" },
   ],
   overviewEyebrow: "Useful footage starts with good planning",
@@ -27,8 +27,8 @@ const config: ProductPageConfig = {
     "Recording capacity and image-quality upgrades are discussed in practical terms so you know what you are paying for and why.",
   ],
   packages: [
-    { eyebrow: "Hikvision system", name: "CCTV installation", price: "From £2,295", description: "August price. Usually from £2,550. A professionally planned system for the principal views around your home.", bullets: ["27-inch Hikvision 1080p monitor", "4-channel HiLook by Hikvision NVR with 4-PoE", "4MP 2.8mm AcuSense Hikvision turret IP camera", "Built-in microphone and 30m IR", "Professional installation and handover"], featured: true },
-    { eyebrow: "Complete protection", name: "Alarm + CCTV", price: "From £3,060", description: "August price. Usually from £3,400. Combine CCTV with our standard installed Pyronix alarm package.", bullets: ["Hikvision CCTV starting system", "Standard Pyronix supply-and-install package", "One coordinated installation", "Full system handover"] },
+    { eyebrow: "Hikvision system", name: "CCTV installation", price: "From £2,550", description: "A professionally planned system for the principal views around your home.", bullets: ["27-inch Hikvision 1080p monitor", "4-channel HiLook by Hikvision NVR with 4-PoE", "4MP 2.8mm AcuSense Hikvision turret IP camera", "Built-in microphone and 30m IR", "Professional installation and handover"], featured: true },
+    { eyebrow: "Complete protection", name: "Alarm + CCTV", price: "From £3,400", description: "Combine CCTV with our standard installed Pyronix alarm package and save £705 against the two starting packages.", bullets: ["Hikvision CCTV starting system", "Standard Pyronix supply-and-install package", "One coordinated installation", "Full system handover"] },
   ],
   process: [
     { title: "Choose the important views", copy: "We identify approaches, entrances, driveways and boundaries where recorded visibility adds real value." },
@@ -43,9 +43,9 @@ const config: ProductPageConfig = {
   ],
   faqs: [
     { question: "Which CCTV system do you install?", answer: "Our CCTV installations use Hikvision equipment, selected and positioned around the views, image detail and storage requirements of your property." },
-    { question: "How much does CCTV installation cost?", answer: "Our standard starting price is £2,550, reduced to £2,295 during August. The final scope depends on camera quantity, cable routes, image specification, storage and any optional additions." },
+    { question: "How much does CCTV installation cost?", answer: "Our standard starting price is £2,550. The final scope depends on camera quantity, cable routes, image specification, storage and any optional additions." },
     { question: "How do I know how many cameras I need?", answer: "We begin with the views you need rather than an arbitrary camera count. The right number follows from the property layout, access routes and areas you want recorded." },
-    { question: "Can CCTV be combined with an alarm?", answer: "Yes. Our bundle starts from £3,400 and combines a CCTV starting system with the standard installed Pyronix alarm package. The August starting price is £3,060." },
+    { question: "Can CCTV be combined with an alarm?", answer: "Yes. Our bundle starts from £3,400 and combines a CCTV starting system with the standard installed Pyronix alarm package, saving £705 against the two starting packages." },
   ],
   finalTitle: "Plan the views. Confirm the price. Protect the property.",
 };
