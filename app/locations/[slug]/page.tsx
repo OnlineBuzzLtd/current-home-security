@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getLocation, locations } from "../location-data";
+import BrandLogo from "../../components/brand-logo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!location) return {};
   return {
     title: `Home Security Installation in ${location.name} | CURRENT`,
-    description: `${location.intro} Pyronix alarm kits from £835, Hikvision CCTV installation from £2,550 and alarm plus CCTV bundles from £3,400. 10% off this August.`,
+    description: `${location.intro} Pyronix alarm kits from £835, Hikvision CCTV installation from £2,550 and alarm plus CCTV bundles from £3,400.`,
     alternates: { canonical: `/locations/${location.slug}` },
   };
 }
@@ -30,7 +31,7 @@ export default async function LocationPage({ params }: PageProps) {
   return (
     <main className="location-page">
       <header className="location-header">
-        <Link className="brand" href="/" aria-label="CURRENT home">CURR<span>E</span>NT</Link>
+        <BrandLogo priority />
         <nav aria-label="Location page navigation">
           <Link href="/alarms">Alarms</Link>
           <Link href="/cctv">CCTV</Link>
@@ -43,7 +44,7 @@ export default async function LocationPage({ params }: PageProps) {
         <div className="location-image" aria-hidden="true" />
         <div className="location-hero-content">
           <p className="eyebrow">Home security · {location.region}</p>
-          <p className="august-offer">August offer · 10% off all packages</p>
+          <p className="august-offer">Autumn offer · free home-security assessment</p>
           <h1>Alarm & CCTV installation in {location.name}.</h1>
           <p>{location.intro}</p>
           <div className="location-actions">
@@ -51,9 +52,9 @@ export default async function LocationPage({ params }: PageProps) {
             <span>Serving {location.postcodes}</span>
           </div>
           <div className="location-price-rail">
-            <div><small>Alarm kit · August</small><strong>From £751.50</strong></div>
-            <div><small>CCTV · August</small><strong>From £2,295</strong></div>
-            <div className="highlight"><small>Bundle · August</small><strong>From £3,060</strong></div>
+            <div><small>Alarm kit · supply only</small><strong>From £835</strong></div>
+            <div><small>CCTV · installed</small><strong>From £2,550</strong></div>
+            <div className="highlight"><small>Bundle · save £705</small><strong>From £3,400</strong></div>
           </div>
         </div>
       </section>
@@ -76,9 +77,9 @@ export default async function LocationPage({ params }: PageProps) {
           <p>Every system is professionally installed, tested and explained. We confirm the final scope before booking the work.</p>
         </div>
         <div className="location-service-grid">
-          <article><span>01</span><p>Pyronix Enforcer V11</p><h3>Alarm systems</h3><strong>£835 / £1,555 / £2,950</strong><p>Supply-only and professionally installed packages, with 10% off this August.</p><Link href="/alarms">Compare alarms ↗</Link></article>
-          <article><span>02</span><p>Hikvision</p><h3>CCTV installation</h3><strong>From £2,550</strong><p>Carefully positioned cameras, dependable storage and a clean finish. 10% off this August.</p><Link href="/cctv">Explore CCTV ↗</Link></article>
-          <article className="featured"><span>03</span><p>Complete protection</p><h3>Alarm + CCTV</h3><strong>From £3,400</strong><p>Our standard installed alarm and CCTV installation combined, with 10% off this August.</p><Link href="/#packages">Choose the bundle ↗</Link></article>
+          <article><span>01</span><p>Pyronix Enforcer V11</p><h3>Alarm systems</h3><strong>£835 / £1,555 / £2,950</strong><p>Supply-only and professionally installed packages with clear inclusions.</p><Link href="/alarms">Compare alarms ↗</Link></article>
+          <article><span>02</span><p>Hikvision</p><h3>CCTV installation</h3><strong>From £2,550</strong><p>Carefully positioned cameras, dependable storage and a clean finish.</p><Link href="/cctv">Explore CCTV ↗</Link></article>
+          <article className="featured"><span>03</span><p>Complete protection</p><h3>Alarm + CCTV</h3><strong>From £3,400</strong><p>Our standard installed alarm and CCTV package combined, saving £705.</p><Link href="/#packages">Choose the bundle ↗</Link></article>
         </div>
       </section>
 
@@ -120,7 +121,7 @@ export default async function LocationPage({ params }: PageProps) {
       </section>
 
       <footer className="location-footer">
-        <Link className="brand" href="/">CURR<span>E</span>NT</Link>
+        <BrandLogo />
         <p>Premium alarm and CCTV installation in {location.name} and across South London.</p>
         <div><Link href="/">Home</Link><Link href="/#packages">Packages</Link><Link href="/#areas">All locations</Link></div>
         <small>© {new Date().getFullYear()} CURRENT Home Security.</small>
