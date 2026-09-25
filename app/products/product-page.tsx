@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { locations } from "../locations/location-data";
+import BrandLogo from "../components/brand-logo";
 
 export type ProductPageConfig = {
   kind: "alarms" | "cctv";
@@ -30,7 +31,7 @@ export default function ProductPage({ config }: { config: ProductPageConfig }) {
   return (
     <main className={`product-page product-${config.kind}`}>
       <header className="product-header">
-        <Link className="brand" href="/" aria-label="CURRENT home">CURR<span>E</span>NT</Link>
+        <BrandLogo priority />
         <nav aria-label="Product page navigation">
           <Link className={config.kind === "alarms" ? "active" : ""} href="/alarms">Alarms</Link>
           <Link className={config.kind === "cctv" ? "active" : ""} href="/cctv">CCTV</Link>
@@ -43,7 +44,7 @@ export default function ProductPage({ config }: { config: ProductPageConfig }) {
         <div className="product-hero-image" aria-hidden="true" />
         <div className="product-hero-content">
           <p className="eyebrow">{config.eyebrow}</p>
-          <p className="august-offer">August offer · 10% off all packages</p>
+          <p className="august-offer">Autumn offer · free home-security assessment</p>
           <h1>{config.title}</h1>
           <p>{config.intro}</p>
           <div className="product-actions">
@@ -146,7 +147,7 @@ export default function ProductPage({ config }: { config: ProductPageConfig }) {
       </section>
 
       <footer className="product-footer">
-        <Link className="brand" href="/">CURR<span>E</span>NT</Link>
+        <BrandLogo />
         <p>Premium alarm and CCTV installation across South London.</p>
         <div><Link href="/alarms">Alarms</Link><Link href="/cctv">CCTV</Link><Link href="/#areas">Locations</Link></div>
         <small>© {new Date().getFullYear()} CURRENT Home Security.</small>
