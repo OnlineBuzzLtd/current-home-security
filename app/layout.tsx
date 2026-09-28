@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { siteUrl } from "./site-url";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        <Analytics />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-16871583749"
           strategy="afterInteractive"
