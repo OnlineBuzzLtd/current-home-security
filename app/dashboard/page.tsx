@@ -20,6 +20,7 @@ export default async function Dashboard() {
   if (!rawData) throw new Error("Dashboard data is not configured");
   const data = JSON.parse(rawData) as DashboardData;
   const totalSpend = data.meta.spend + data.google.spend;
+  const leadCount = data.leads.length;
 
   return (
     <main className={styles.page}>
@@ -29,14 +30,14 @@ export default async function Dashboard() {
             <div className={styles.mark}>CURR<i>≡</i>NT</div>
             <div><h1>Performance dashboard</h1><p>Marketing snapshot and lead register</p></div>
           </div>
-          <span className={styles.updated}>Updated 28 September 2026</span>
+          <span className={styles.updated}>Lead register updated 3 October 2026</span>
         </header>
 
         <section className={styles.metrics}>
           <article className={styles.card}><span className={styles.label}>Total visits</span><strong className={`${styles.value} ${styles.valueSmall}`}>Collecting now</strong><small>Visit tracking started 28 September</small></article>
-          <article className={styles.card}><span className={styles.label}>Recorded leads</span><strong className={styles.value}>{data.meta.leads}</strong><small>All supplied leads are from Meta</small></article>
+          <article className={styles.card}><span className={styles.label}>Recorded leads</span><strong className={styles.value}>{leadCount}</strong><small>All supplied leads are from Meta</small></article>
           <article className={styles.card}><span className={styles.label}>Total ad spend</span><strong className={styles.value}>{money(totalSpend)}</strong><small>Google Ads and Meta combined</small></article>
-          <article className={styles.card}><span className={styles.label}>Blended cost per lead</span><strong className={styles.value}>{money(totalSpend / data.meta.leads)}</strong><small>Based on the seven supplied leads</small></article>
+          <article className={styles.card}><span className={styles.label}>Blended cost per lead</span><strong className={styles.value}>{leadCount ? money(totalSpend / leadCount) : "—"}</strong><small>Based on {leadCount} supplied leads and the last supplied spend snapshot</small></article>
         </section>
 
         <section className={styles.channels}>
@@ -46,7 +47,7 @@ export default async function Dashboard() {
           </article>
           <article className={`${styles.card} ${styles.channel} ${styles.channelMeta}`}>
             <div className={styles.channelHead}><h2>Meta Ads</h2><span className={styles.pill}>FB + IG</span></div>
-            <div className={styles.stats}><div><span>Impressions</span><strong>{data.meta.impressions.toLocaleString()}</strong></div><div><span>Spend</span><strong>{money(data.meta.spend)}</strong></div><div><span>Leads</span><strong>{data.meta.leads}</strong></div><div><span>Cost per lead</span><strong>{money(data.meta.costPerLead)}</strong></div></div>
+            <div className={styles.stats}><div><span>Impressions</span><strong>{data.meta.impressions.toLocaleString()}</strong></div><div><span>Spend</span><strong>{money(data.meta.spend)}</strong></div><div><span>Leads</span><strong>{leadCount}</strong></div><div><span>Cost per lead*</span><strong>{leadCount ? money(data.meta.spend / leadCount) : "—"}</strong></div></div>
           </article>
           <article className={`${styles.card} ${styles.channel} ${styles.channelOrganic}`}>
             <div className={styles.channelHead}><h2>Organic</h2><span className={styles.pill}>UNPAID</span></div>
@@ -72,7 +73,7 @@ export default async function Dashboard() {
             </table>
           </div>
         </section>
-        <p className={styles.notice}>Snapshot data supplied manually. Website visits are now being collected separately by Vercel Analytics and are not backfilled. Impressions have not been presented as visits.</p>
+        <p className={styles.notice}>Snapshot data supplied manually. *Cost per lead uses the last supplied spend against the current lead register, so it is indicative until spend is refreshed. Website visits are collected separately by Vercel Analytics and are not backfilled. Impressions have not been presented as visits.</p>
       </div>
     </main>
   );
