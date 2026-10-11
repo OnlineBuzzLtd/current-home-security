@@ -13,7 +13,7 @@ type DashboardData = {
 };
 
 const money = (value: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(value);
-const date = (value: string) => new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(value));
+const date = (value: string) => !value || Number.isNaN(Date.parse(value)) ? "Not supplied" : new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(value));
 
 export default async function Dashboard() {
   const rawData = process.env.DASHBOARD_DATA;
@@ -30,7 +30,7 @@ export default async function Dashboard() {
             <div className={styles.mark}>CURR<i>≡</i>NT</div>
             <div><h1>Performance dashboard</h1><p>Marketing snapshot and lead register</p></div>
           </div>
-          <span className={styles.updated}>Lead register updated 3 October 2026</span>
+          <span className={styles.updated}>Lead register updated 11 October 2026</span>
         </header>
 
         <section className={styles.metrics}>
@@ -64,16 +64,16 @@ export default async function Dashboard() {
                 <tr key={id}>
                   <td>{date(created)}</td>
                   <td><span className={styles.person}>{name}</span><a className={styles.contact} href={`tel:${phone}`}>{phone}</a><br/><a className={styles.contact} href={`mailto:${email}`}>{email}</a></td>
-                  <td className={styles.source}>{source === "ig" ? "Instagram" : "Facebook"}</td>
+                  <td className={styles.source}>{source === "ig" ? "Instagram" : source === "fb" ? "Facebook" : "Meta (platform not supplied)"}</td>
                   <td className={styles.detail}>{home}</td>
                   <td className={styles.detail}>{areas}</td>
-                  <td>{id}</td>
+                  <td>{id.startsWith("manual:") ? "Not supplied" : id}</td>
                 </tr>
               ))}</tbody>
             </table>
           </div>
         </section>
-        <p className={styles.notice}>Snapshot data supplied manually. *Cost per lead uses the last supplied spend against the current lead register, so it is indicative until spend is refreshed. Website visits are collected separately by Vercel Analytics and are not backfilled. Impressions have not been presented as visits.</p>
+        <p className={styles.notice}>Snapshot data supplied manually. Meta snapshot: 11 October 2026; Google Ads figures remain the previously supplied snapshot. Four new leads have no supplied creation date, platform breakdown or Meta lead ID. *Cost per lead uses the last supplied spend against the current lead register, so it is indicative until spend is refreshed. Website visits are collected separately by Vercel Analytics and are not backfilled. Impressions have not been presented as visits.</p>
       </div>
     </main>
   );
