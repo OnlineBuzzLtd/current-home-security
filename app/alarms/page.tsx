@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ProductPage, { type ProductPageConfig } from "../products/product-page";
 
 export const metadata: Metadata = {
-  title: "Pyronix Alarm Kits & Installation South London | From £835",
-  description: "Pyronix Enforcer V11 alarm kits from £835, with professional supply-and-install packages at £1,555 and £2,950.",
+  title: "Pyronix Alarm Installation South London | From £985",
+  description: "Professionally installed Pyronix Enforcer V11 alarms: Essential £985, Plus £1,300 and Premium £1,700. First year of app access included.",
   alternates: { canonical: "/alarms" },
 };
 
@@ -11,13 +11,13 @@ const config: ProductPageConfig = {
   kind: "alarms",
   eyebrow: "Pyronix Enforcer V11 · South London",
   title: "A home alarm installed around your life.",
-  intro: "Choose a supply-only Pyronix alarm kit or professional installation, with three transparent packages and a free home-security assessment.",
+  intro: "Choose Essential, Plus or Premium wireless alarm installation, with clear equipment lists, setup, testing and handover.",
   quoteHref: "/?quote=alarm",
   postcodeLine: "Free home-security assessment",
   heroTiles: [
-    { label: "Kit only", value: "£835" },
-    { label: "Installed", value: "£1,555", featured: true },
-    { label: "Top tier", value: "£2,950" },
+    { label: "Essential installed", value: "£985" },
+    { label: "Plus installed", value: "£1,300", featured: true },
+    { label: "Premium installed", value: "£1,700" },
   ],
   overviewEyebrow: "Alarm protection without the guesswork",
   overviewTitle: "Coverage that reflects how your home is actually used.",
@@ -27,9 +27,9 @@ const config: ProductPageConfig = {
     "The Pyronix Enforcer V11 platform gives us a strong, expandable foundation for family homes and more complex layouts.",
   ],
   packages: [
-    { eyebrow: "Supply kit only", name: "Wireless Enforcer Kit", price: "£835", description: "The complete kit supplied for your own installation.", bullets: ["ProControl+ app access", "Enforcer V11 panel with built-in Wi-Fi", "Wireless arming station", "4 pet-immune wireless PIR detectors", "2 nano door contacts", "Wireless Deltabell module and cover"] },
-    { eyebrow: "Standard supply & install", name: "Professionally Installed", price: "£1,555", description: "Our complete kit with premium professional installation.", bullets: ["Everything in the supply-only kit", "Premium professional installation", "10+ year experienced installer", "System setup, testing and handover"], featured: true },
-    { eyebrow: "Top tier supply & install", name: "Expanded Protection", price: "£2,950", description: "More detection and control for larger homes.", bullets: ["Everything in the standard installed package", "Additional tablet arming screen", "2 additional pet-immune PIR detectors", "1 additional nano door contact", "1 additional keypad", "4 shock sensors"] },
+    { eyebrow: "Essential · installed", name: "Essential", price: "£985", description: "Protect the main ways into your home.", bullets: ["Enforcer V11 wireless panel with Wi-Fi", "2 pet-immune wireless PIR detectors, 10m range", "1 nano door contact", "2 two-way wireless keyfobs", "Installation, setup, testing and handover", "1 year of optional app access included"] },
+    { eyebrow: "Plus · most popular", name: "Plus", price: "£1,300", description: "Front, back and the areas you worry about, covered.", bullets: ["Enforcer V11 wireless panel with onboard Wi-Fi", "4 pet-immune wireless PIR detectors, 10m range", "2 nano door contacts", "Wireless external Deltabell", "Installation, setup, testing and handover", "1 year of optional app access included"], featured: true },
+    { eyebrow: "Premium · installed", name: "Premium", price: "£1,700", description: "More door protection and tablet control.", bullets: ["Enforcer V11 panel with integrated DIGI-WIFI communicator", "Compatible Android tablet for HomeControlHUB", "4 pet-immune wireless PIR detectors, 10m range", "3 nano door contacts", "Wireless external Deltabell", "Installation, setup, testing and handover", "1 year of optional app access included"] },
   ],
   process: [
     { title: "Map the access points", copy: "We review doors, accessible windows, side access and the way people move through the property." },
@@ -46,11 +46,11 @@ const config: ProductPageConfig = {
     { question: "Which alarm system do you install?", answer: "Our alarm packages are based on the Pyronix Enforcer V11 platform, configured around the layout and coverage requirements of your home." },
     { question: "Which package is right for me?", answer: "The three tiers provide realistic starting points. We recommend the most suitable level after reviewing the property size, entrances and areas you want protected." },
     { question: "Can the system be expanded later?", answer: "Additional detectors, shock sensors, keypads and other suitable components can be discussed at installation or as your requirements change." },
-    { question: "Is installation included?", answer: "Installation is not included in the £835 supply-only kit. It is included in the £1,555 standard and £2,950 top-tier packages." },
+    { question: "Is installation included?", answer: "Professional installation is included in all three packages: Essential £985, Plus £1,300 and Premium £1,700. A £150 deposit is payable, with the balance on completion of setup." },
   ],
   finalTitle: "Choose the alarm. Confirm the scope. Protect the home.",
 };
 
 export default function AlarmsPage() {
-  return <ProductPage config={config} />;
+  return <><ProductPage config={config} /><section className="section"><p className="eyebrow">Before you book</p><h2>Alarm installation questions, answered.</h2><p>Compare costs, plan sensor coverage and understand app fees, installation disruption and replacing an old alarm.</p><p><a className="button button-primary" href="/alarm-guides">Read our six alarm installation guides</a></p><p>Standard cover: 12-month workmanship warranty, 2-year manufacturer warranty on the system and 3 years on wireless sensors. Call-out fees apply for faulty equipment under standard terms. Optional app access is £36 a year after the included first year. <a href="/autumn-offer">View package terms and add-on prices.</a></p></section></>;
 }
