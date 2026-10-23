@@ -7,25 +7,19 @@ export const metadata = {
 };
 
 type DashboardData = {
-  meta: { impressions: number; spend: number; leads: number; costPerLead: number; campaign: string };
+  meta: { impressions: number; spend: number; leads: number; costPerLead: number; campaign: string; reach?: number; dailyBudget?: number; snapshotDate?: string; reportingRange?: string };
   google: { impressions: number; averageCpc: number; spend: number };
   leads: string[][];
 };
 
 const money = (value: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(value);
-const date = (value: string) => !value || Number.isNaN(Date.parse(value)) ? "Not supplied" : new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(value));
+const date = (value: string) => !value || Number.isNaN(Date.parse(value)) ? "Not supplied" : new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", ...(value.includes("T") ? { timeStyle: "short" as const } : {}), timeZone: "Europe/London" }).format(new Date(value));
 
 export default async function Dashboard() {
   const rawData = process.env.DASHBOARD_DATA;
   if (!rawData) throw new Error("Dashboard data is not configured");
   const data = JSON.parse(rawData) as DashboardData;
-  // Manually supplied Meta screenshot, received 16 October 2026.
-  const ads = [
-    { name: "New Leads ad · row 1", leads: 3, spend: 93, impressions: 3088, reach: 1526 },
-    { name: "New Leads ad · row 2", leads: 0, spend: 52.19, impressions: 2467, reach: 1343 },
-    { name: "New Leads ad · row 3", leads: 10, spend: 276.10, impressions: 10455, reach: 3769 },
-  ];
-  const meta = ads.reduce((total, ad) => ({ leads: total.leads + ad.leads, spend: total.spend + ad.spend, impressions: total.impressions + ad.impressions }), { leads: 0, spend: 0, impressions: 0 });
+  const meta = data.meta;
   const totalSpend = meta.spend + data.google.spend;
   const leadCount = data.leads.length;
 
@@ -37,11 +31,11 @@ export default async function Dashboard() {
             <div className={styles.mark}>CURR<i>≡</i>NT</div>
             <div><h1>Performance dashboard</h1><p>Marketing snapshot and lead register</p></div>
           </div>
-          <span className={styles.updated}>Meta figures updated 16 October 2026</span>
+          <span className={styles.updated}>Updated {meta.snapshotDate || "23 October 2026"}</span>
         </header>
 
         <section className={styles.metrics}>
-          <article className={styles.card}><span className={styles.label}>Total visits</span><strong className={`${styles.value} ${styles.valueSmall}`}>Collecting now</strong><small>Visit tracking started 28 September</small></article>
+          <article className={styles.card}><span className={styles.label}>Total visits</span><strong className={`${styles.value} ${styles.valueSmall}`}>Not available</strong><small>No verified website visit total supplied</small></article>
           <article className={styles.card}><span className={styles.label}>Recorded leads</span><strong className={styles.value}>{leadCount}</strong><small>Contact details supplied; Meta reports {meta.leads} leads</small></article>
           <article className={styles.card}><span className={styles.label}>Total ad spend</span><strong className={styles.value}>{money(totalSpend)}</strong><small>Google Ads and Meta combined</small></article>
           <article className={styles.card}><span className={styles.label}>Indicative blended cost per lead</span><strong className={styles.value}>{meta.leads ? money(totalSpend / meta.leads) : "—"}</strong><small>Uses {meta.leads} reported Meta leads and spend snapshots from different dates</small></article>
@@ -58,14 +52,14 @@ export default async function Dashboard() {
           </article>
           <article className={`${styles.card} ${styles.channel} ${styles.channelOrganic}`}>
             <div className={styles.channelHead}><h2>Organic</h2><span className={styles.pill}>UNPAID</span></div>
-            <div className={styles.stats}><div><span>Visits</span><strong>Collecting</strong></div><div><span>Leads supplied</span><strong>0</strong></div><div><span>Spend</span><strong>£0.00</strong></div><div><span>Status</span><strong>Live</strong></div></div>
+            <div className={styles.stats}><div><span>Visits</span><strong>Not available</strong></div><div><span>Leads supplied</span><strong>0</strong></div><div><span>Spend</span><strong>£0.00</strong></div><div><span>Status</span><strong>No visit data</strong></div></div>
           </article>
         </section>
 
         <section className={styles.panel}>
-          <div className={styles.panelHead}><div><h2>Meta ad breakdown</h2><p>Three rows supplied on 16 October 2026. The screenshot does not show its reporting date range.</p></div></div>
-          <div className={styles.tableWrap}><table className={styles.table}><thead><tr><th>Ad</th><th>Leads</th><th>Spend</th><th>Cost per lead</th><th>Impressions</th><th>Reach</th></tr></thead><tbody>{ads.map(ad => <tr key={ad.name}><td>{ad.name}</td><td>{ad.leads}</td><td>{money(ad.spend)}</td><td>{ad.leads ? money(ad.spend / ad.leads) : "No leads reported"}</td><td>{ad.impressions.toLocaleString()}</td><td>{ad.reach.toLocaleString()}</td></tr>)}</tbody></table></div>
-          <p className={styles.notice}>Reach is shown per ad only because the same people may see multiple ads. {Math.max(0, meta.leads - leadCount)} reported lead(s) do not yet have contact details in the register. Row numbers distinguish the identical ad names shown in the screenshot.</p>
+          <div className={styles.panelHead}><div><h2>Alarm campaign snapshot</h2><p>{meta.campaign}</p></div></div>
+          <div className={styles.tableWrap}><table className={styles.table}><thead><tr><th>Reporting range</th><th>Leads</th><th>Spend</th><th>Cost per lead</th><th>Impressions</th><th>Reach</th><th>Daily budget</th></tr></thead><tbody><tr><td>{meta.reportingRange || "Not supplied"}</td><td>{meta.leads}</td><td>{money(meta.spend)}</td><td>{meta.leads ? money(meta.spend / meta.leads) : "—"}</td><td>{meta.impressions.toLocaleString()}</td><td>{meta.reach?.toLocaleString() || "Not supplied"}</td><td>{meta.dailyBudget !== undefined ? money(meta.dailyBudget) : "Not supplied"}</td></tr></tbody></table></div>
+          <p className={styles.notice}>{Math.max(0, meta.leads - leadCount)} reported lead(s) await contact details. This snapshot covers the alarm campaign only; the separate electrical-check and EICR campaigns shown in the supplied screenshot are excluded.</p>
         </section>
 
         <section className={styles.panel}>
@@ -86,7 +80,7 @@ export default async function Dashboard() {
             </table>
           </div>
         </section>
-        <p className={styles.notice}>Snapshot data supplied manually. Meta screenshot received: 16 October 2026 (reporting date range not visible); Google Ads figures remain the previously supplied snapshot. Four new leads have no supplied creation date, platform breakdown or Meta lead ID. Meta cost per lead includes spend across all three supplied ad rows, including the row with no reported leads. Blended cost per lead combines differently dated channel snapshots and is indicative only. Website visits are collected separately by Vercel Analytics and are not backfilled. Impressions have not been presented as visits.</p>
+        <p className={styles.notice}>Snapshot data supplied manually. Meta figures and lead register updated 23 October 2026. Lead export dates are interpreted as month/day/year; no submission times were supplied. Google Ads figures remain the previous snapshot. Blended cost per lead combines differently dated channel snapshots and is indicative only. No verified website visit total has been supplied; impressions are not visits.</p>
       </div>
     </main>
   );
